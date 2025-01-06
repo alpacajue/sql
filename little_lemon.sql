@@ -1,8 +1,15 @@
+/*
+Description: Coursera Capstone
+Author: alpacajue
+Last Updated: 2025-01-06
+*/
 
+-- create database
 drop database if exists little_lemon;
 create database if not exists little_lemon;
 use little_lemon;
 
+-- create tables
 drop table if exists customers, booking, staff, menu, orders, order_items;
 create table if not exists customers (
 	customer_id int auto_increment primary key,
@@ -51,6 +58,7 @@ create table if not exists order_items (
 	);
 show tables;
 
+-- insert sample data
 insert into customers (name,phone,email) values
   ('Alice', '123456789', 'alice@example.com'),
   ('Bob',   '987654321', 'bob@example.com');
@@ -71,6 +79,7 @@ insert into orders (booking_id) values
 insert into order_items (order_id, menu_item_id, quantity, price) values
   (5, 1, 2, 10.00);
 
+-- create stored procedures
 -- addingbooking()
 delimiter $$
 create procedure addbooking(
@@ -175,8 +184,7 @@ end $$
 delimiter ;
 call getmaxquantity();
 
--- query
+-- check query
 select b.booking_id, c.name, b.booking_date, b.booking_time, b.table_number
 from booking b
 join customers c on b.customer_id=c.customer_id;
-
